@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TipInConfig
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<TipIn>
+   <!-- start height(mm) -->
+   <type>StartHight</type>
+   <value>90</value>
+
+   <!-- end height(mm) -->
+   <type>InHight</type>
+   <value>100</value>
+
+   <!-- Z axis down speed(mm/sec) -->
+   <type>InHightSpeed</type>
+   <value>5</value>
+
+   <!-- wait time(msec) -->
+   <type>InWaitTime</type>
+   <value>0</value>
+</TipIn>
+
+<TipOut>
+   <!-- Out p axis pos(mm) -->
+   <type>TipRejectionPos</type>
+   <value>-12</value>
+</TipOut>
+
+<TipOut_Tiprack>
+   <!-- start height(mm) -->
+   <type>Tiprack_OutStartHight</type>
+   <value>66</value>
+   
+   <!-- Tip out height(mm) -->
+   <type>Tiprack_OutHight</type>
+   <value>85</value>
+     
+   <!-- Z axis down speed(mm/sec) -->
+   <type>Tiprack_OutZSpeed</type>
+   <value>50</value>
+     
+   <!-- P axis speed(mm/sec) -->
+   <type>Tiprack_OutPSpeed</type>
+   <value>10</value>
+</TipOut_Tiprack>
+
+<TipOut_TrashBox>
+   <!-- start height(mm) -->
+   <type>TrashBox_OutStartHight</type>
+   <value>74</value>
+   
+   <!-- Tip out height(mm) -->
+   <type>TrashBox_OutHight</type>
+   <value>74</value>
+     
+   <!-- Z axis down speed(mm/sec) -->
+   <type>TrashBox_OutZSpeed</type>
+   <value>100</value>
+     
+   <!-- P axis speed(mm/sec) -->
+   <type>TrashBox_OutPSpeed</type>
+   <value>10</value>
+</TipOut_TrashBox>
+</TipInConfig>

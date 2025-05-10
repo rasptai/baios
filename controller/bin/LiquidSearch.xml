@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchConfig
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+   <!-- Start P axis(mm) -->
+   <type>SearchStartPos</type>
+   <value>15</value>
+
+   <!-- End P axis(mm) -->
+   <type>SearchEndPos</type>
+   <value>-1</value>
+
+   <!-- P axis Speed(mm/sec) -->
+   <type>SearchSpeed</type>
+   <value>5</value>
+
+   <!-- Z axis Speed(mm/sec) -->
+   <type>SearchDownSpeed</type>
+   <value>5</value>
+
+   <!-- Press count -->
+   <type>SearchPressCount</type>
+   <value>10</value>
+
+</SearchConfig>

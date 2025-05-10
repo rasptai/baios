@@ -1,0 +1,8 @@
+﻿,PulseRate,Resolution,Speed Control,Speed def,Speed min,Speed max,Distance min,Distance max,Dir,InitSpec2,InitHard7,RESOL,ORGSpec,ORG,FalseORG,OrgHSPD,OrgFSPD,OrgJSPD,OrgLSPD,OrgELSPD,OrgUCYCLE,OrgDCYCLE,HSPD,FSPD,JSPD,LSPD,ELSPD,UCYCLE,DCYCLE
+Axis,(p/mm),(p),(mm/sec),(mm/sec),(mm/sec),(mm/sec),(mm),(mm),,Bit,Bit,Type,Bit,Type,(mm),(mm/sec),(Hz),(Hz),(Hz),(Hz),(ms/1000Hz),(ms/1000Hz),(mm/sec),(Hz),(Hz),(Hz),(Hz),(ms/1000Hz),(ms/1000Hz)
+X,1000,1000,25,25,0.1,25,0,70,-1,3843,63480,4,32913,2,0,4,1000,300,800,100,200,200,8,50000,3000,800,1000,10,10
+Y,1000,1000,25,25,0.1,25,0,38.75,1,3852,63476,4,32912,2,0,4,1000,300,800,100,200,200,8,50000,3000,800,1000,10,10
+Z,1000,1000,10,10,0.1,10,0,10,1,3852,63476,4,32912,2,0,4,1000,300,800,100,200,200,8,50000,3000,800,1000,10,10
+P,2.7777,1000,72,72,72,72,0,88.5,1,3856,63484,3,32912,0,0,72,50,100,100,0,200,0,72,50,100,100,0,100,0
+comment,RESOL  3 = 1times    RESOL  4 = 2times,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+comment,Speed max(mm/sec) / (1/PulseRate(p/mm)) x RESOL < 32767Hz,,,,,,,,,,,,,,,,,,,,,,,,,,,,
