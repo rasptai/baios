@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "metadata": {
+    "name": "Nunc Maxisorp 96 Well Plate Flat Bottom",
+    "category": "Well Plates",
+    "manufacturer": "Thermo Fisher Scientific"
+  },
+  "outerDimensions": {
+    "length": 127.76,
+    "width": 85.47,
+    "height": 14.4
+  },
+  "groups": [
+    {
+      "boundingBox": {
+        "x": 0,
+        "y": 0,
+        "width": 127.76,
+        "height": 85.47
+      },
+      "wellPlacement": {
+        "counts": 96,
+        "rows": 8,
+        "columns": 12,
+        "wellSpacing": { "x": 9.0, "y": 9.0 },
+        "a1Location": { "x": 14.32, "y": 11.25 }
+      },
+      "wellGeometry": {
+        "shape": "circle",
+        "segment": "single",
+        "topOffset": 0.0,
+        "topDiameter": 7.0,
+        "depth": 11.3,
+        "bottomDiameter": 6.1,
+        "bottomShape": "flat"
+      }
+    }
+  ]
+}
