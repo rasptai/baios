@@ -1,7 +1,0 @@
-PySide6
-pandas
-openpyxl
-numpy
-scipy
-matplotlib
-scikit-image
