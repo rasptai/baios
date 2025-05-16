@@ -5,10 +5,10 @@ from ctypes import CDLL, c_int32, c_double, c_wchar_p
 # ┌─────────────────── acquire the dll path ───────────────────────┐
 
 if __package__ :
-    _dll_path = files(__package__).joinpath("_hardware_driver", "BAiOS.dll")
+    _dll_path = files(__package__).joinpath("bin", "BAiOS.dll")
 else:
     _base_dir = Path(__file__).parent
-    _dll_path = _base_dir.joinpath("_hardware_driver", "BAiOS.dll")
+    _dll_path = _base_dir.joinpath("bin", "BAiOS.dll")
 
 hardware_lib = CDLL(str(_dll_path)) # uc-7660.infがインストール済 ＆ 初回は実際に接続された状態でないとエラーが出る
 
