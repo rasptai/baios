@@ -2,40 +2,42 @@
 
 classDiagram
 
-%% class BAiOS
-%% class Device
-%% class Stage
-%% class Monitor
-%% class Labware
-%% class Led
-  BAiOSSystem "1" *-- "1" DeviceController : uses
-    BAiOSSystem "1" *-- "2" Device : has
-    BAiOSSystem "1" *-- "4" Stage : has
-    BAiOSSystem "1" *-- "1" LabwareFactory : uses
+class DeviceController {
+  +liquid_handler: SLXDevice
+  +imaging_unit:   IMGDevice
+}
 
-    DeviceController <|-- DeviceMonitor : delegates
-    DeviceController "1" o-- "*" Device : provides
-    Device "1" o-- "1" DeviceMonitor : has
+class BaseDevice {
+  +hard
+  +state
+  +monitor
+  +position_mm: dict
+  +position_step: dict
+  +start_monitor()
+  +stop_monitor()
+  +get_axis_pos()
+  +get_axis_step_pos()
+  -on_state()
+}
 
-    Stage "1" o-- "*" Labware : holds
+class SLXDevice
 
+class IMGDevice
 
+class Monitor {
+  +hard
+  +interval
+  +callback
+  -stop_event
+  -thread
+  +start()
+  +stop()
+  -run()
+}
 
-    %% class DeviceController {
-    %%     +dispense(x,y,z,vol)
-    %%     +move_stage(axis, pos)
-    %%     +open(), close()
-    %% }
-    %% class StageManager {
-    %%     +place_labware(stage_id, labware)
-    %%     +remove_labware(stage_id)
-    %%     +get_labware(stage_id)
-    %% }
-    %% class SystemFacade {
-    %%     +with_system(): context
-    %%     +dispense_on(stage_id, well, vol)
-    %%     +capture_image(stage_id)
-    %% }
-
-    %% SystemFacade --> DeviceController : uses
-    %% SystemFacade --> StageManager      : uses
+BaseDevice <|-- SLXDevice : 継承
+BaseDevice <|-- IMGDevice : 継承
+DeviceController "1" *-- "1" SLXDevice : has
+DeviceController "1" *-- "1" IMGDevice : has
+SLXDevice "1" o-- "1" Monitor : 合成
+IMGDevice "1" o-- "1" Monitor : 合成
