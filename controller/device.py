@@ -1,6 +1,6 @@
 from enum import IntEnum
-import threading
-import controller.signature as signature
+from signature import hardware_lib
+from monitor import Monitor
 
 class HardID(IntEnum):
     SLX = 90010
@@ -16,11 +16,17 @@ class Device:
     def _on_state(self, state):
         self.state = state
         if state == 0:
-            print(f"Device {self.hard} is in normal state.")
+            print(f"{self.hard} is Ready.")
         elif state == 1:
-            print(f"Device {self.hard} is in error state.")
-        else:
-            print(f"Device {self.hard} is in unknown state.")
+            print(f"{self.hard} is System Busy.")
+        elif state == 2:
+            print(f"{self.hard} is Busy.")
+        elif state == 3:
+            print(f"{self.hard} is Stop.")
+        elif state == 4:
+            print(f"{self.hard} is Collision Detected.")
+        elif state == 5:
+            print(f"{self.hard} is Collision Stop.")
 
     def start_monitor(self):
         self.monitor.start()

@@ -1,7 +1,10 @@
-class BAiOS:
+from device import Device, HardID
+from signature import hardware_lib
+
+class DeviceController:
     _instance = None
     _initialized = False
-    _context_count = 0 # with文で呼び出されている回数をカウント
+    _ref_count = 0
 
     def __new__(cls):
         if cls._instance is None:
@@ -18,8 +21,8 @@ class BAiOS:
     def __enter__(self):
         if not self._context_count:
             self.FuncDeviceOpen()
-            self.slx.start_poll()
-            self.img.start_poll()
+            self.slx.start_monitor()
+            self.img.start_monitor()
             print("Devices are opened and started.")
 
         self._context_count += 1
@@ -28,17 +31,17 @@ class BAiOS:
     def __exit__(self, exc_type, exc_value, traceback):
         self._context_count -= 1
         if not self._context_count:
-            self.slx.stop_poll()
-            self.img.stop_poll()
+            self.slx.stop_monitor()
+            self.img.stop_monitor()
             self.FuncDeviceClose()
             print("Devices are stopped and closed.")
 
         return False
 
     def FuncDeviceOpen(self):
-        result = signature.hardware_lib.FuncDeviceOpen()
+        result = hardware_lib.FuncDeviceOpen()
         if result != 0:
             raise Exception(f"Failed to open device. Error code: {result}")
 
     def FuncDeviceClose(self):
-        signature.hardware_lib.FuncDeviceClose()
+        hardware_lib.FuncDeviceClose()
