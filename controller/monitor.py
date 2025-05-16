@@ -19,8 +19,11 @@ class Monitor:
             self._thread.join()      # 停止指示を出した後、スレッドが終了するまで待機
 
     def _run(self):
+        last_state = None
         while not self._stop_event.is_set():
             state = hardware_lib.FuncGetState(self.hard_id)
-            self.callback(state)
+            if state != last_state:
+                self.callback(state)
+                last_state = state
             self._stop_event.wait(self.interval)
 

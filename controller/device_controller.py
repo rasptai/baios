@@ -42,20 +42,9 @@ class DeviceController:
             print("Devices are stopped and closed.")
         return False
 
-    def _on_state(self, state):
-        self.state = state
-        if state == 0:
-            print(f"{self.hard} is Ready.")
-        elif state == 1:
-            print(f"{self.hard} is System Busy.")
-        elif state == 2:
-            print(f"{self.hard} is Busy.")
-        elif state == 3:
-            print(f"{self.hard} is Stop.")
-        elif state == 4:
-            print(f"{self.hard} is Collision Detected.")
-        elif state == 5:
-            print(f"{self.hard} is Collision Stop.")
+    def _on_state(self, hard, state):
+        self.states[hard] = state
+        print(f"State changed: {hard} -> {state}")
 
     def device_open(self):
         result = hardware_lib.FuncDeviceOpen()
