@@ -24,18 +24,18 @@ class DeviceController:
         self._initialized = True
 
     def __enter__(self):
-        if not self._context_count:
+        if not self._ref_count:
             self.device_open()
             for monitor in self.monitors.values():
                 monitor.start()
             print("Devices are opened and started.")
 
-        self._context_count += 1
+        self._ref_count += 1
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._context_count -= 1
-        if not self._context_count:
+        self._ref_count -= 1
+        if not self._ref_count:
             for monitor in self.monitors.values():
                 monitor.stop()
             self.device_close()
