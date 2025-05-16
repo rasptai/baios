@@ -1,4 +1,4 @@
-from signature import hardware_lib
+from signature import dll
 import threading
 class Monitor:
     def __init__(self, hard, callback, interval=0.1):
@@ -21,7 +21,7 @@ class Monitor:
     def _run(self):
         last_state = None
         while not self._stop_event.is_set():
-            state = hardware_lib.FuncGetState(self.hard_id)
+            state = dll.FuncGetState(self.hard_id)
             if state != last_state:
                 self.callback(state)
                 last_state = state

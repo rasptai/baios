@@ -1,11 +1,10 @@
-from signature import load_dll
+from signature import dll
 class DeviceController:
     _instance = None
 
     def __new__(cls):
         if cls._instance is None:
             instance = super().__new__(cls)
-            instance._dll = load_dll()
             instance._ref_count = 0         # with文で呼び出されている回数をカウント
             cls._instance = instance
         return cls._instance
@@ -26,12 +25,12 @@ class DeviceController:
         return False
 
     def device_open(self):
-        result = self._dll.FuncDeviceOpen()
+        result = dll.FuncDeviceOpen()
         if result != 0:
             raise Exception(f"Failed to open device. Error code: {result}")
 
     def device_close(self):
-        self._dll.FuncDeviceClose()
+        dll.FuncDeviceClose()
 
     # def is_org(self, hard):
     #     return self._dll.FuncIsOrg(hard)

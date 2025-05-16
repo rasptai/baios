@@ -2,134 +2,131 @@ from importlib.resources import files
 from pathlib import Path
 from ctypes import CDLL, c_int32, c_double, c_wchar_p
 
-def load_dll():
-    if __package__ :
-        _dll_path = files(__package__).joinpath("bin", "BAiOS.dll")
-    else:
-        _base_dir = Path(__file__).parent
-        _dll_path = _base_dir.joinpath("bin", "BAiOS.dll")
+if __package__ :
+    dll_path = files(__package__).joinpath("bin", "BAiOS.dll")
+else:
+    base_dir = Path(__file__).parent
+    dll_path = base_dir.joinpath("bin", "BAiOS.dll")
 
-    # uc-7660.infがインストール済 ＆ 初回は実際に接続された状態でないとエラーが出る
-    _dll = CDLL(str(_dll_path))
+# uc-7660.infがインストール済 ＆ 初回は実際に接続された状態でないとエラーが出る
+dll = CDLL(str(dll_path))
 
-    # ┌────────────────────────── Devices ─────────────────────────────┐
+# ┌────────────────────────── Devices ─────────────────────────────┐
 
-    _dll.FuncDeviceOpen.argtypes = []
-    _dll.FuncDeviceOpen.restype = c_int32
+dll.FuncDeviceOpen.argtypes = []
+dll.FuncDeviceOpen.restype = c_int32
 
-    _dll.FuncDeviceClose.argtypes = []
-    _dll.FuncDeviceClose.restype = None
+dll.FuncDeviceClose.argtypes = []
+dll.FuncDeviceClose.restype = None
 
-    # └────────────────────────────────────────────────────────────────┘
+# └────────────────────────────────────────────────────────────────┘
 
-    # ┌──────────────────────────── IO ────────────────────────────────┐
+# ┌──────────────────────────── IO ────────────────────────────────┐
 
-    _dll.FuncIsORG.argtypes = [c_int32]
-    _dll.FuncIsORG.restype = c_int32
+dll.FuncIsORG.argtypes = [c_int32]
+dll.FuncIsORG.restype = c_int32
 
-    _dll.FuncIsSyringeORG.argtypes = []
-    _dll.FuncIsSyringeORG.restype = c_int32
+dll.FuncIsSyringeORG.argtypes = []
+dll.FuncIsSyringeORG.restype = c_int32
 
-    _dll.CheckIODownSensor.argtypes = []
-    _dll.CheckIODownSensor.restype = c_int32
+dll.CheckIODownSensor.argtypes = []
+dll.CheckIODownSensor.restype = c_int32
 
-    _dll.CheckIOPressSensor.argtypes = []
-    _dll.CheckIOPressSensor.restype = c_int32
+dll.CheckIOPressSensor.argtypes = []
+dll.CheckIOPressSensor.restype = c_int32
 
-    _dll.CheckIOPressSensorPower.argtypes = []
-    _dll.CheckIOPressSensorPower.restype = c_int32
+dll.CheckIOPressSensorPower.argtypes = []
+dll.CheckIOPressSensorPower.restype = c_int32
 
-    _dll.SensorPowerOnOff.argtypes = [c_int32]
-    _dll.SensorPowerOnOff.restype = c_int32
+dll.SensorPowerOnOff.argtypes = [c_int32]
+dll.SensorPowerOnOff.restype = c_int32
 
-    _dll.SensorZero.argtypes = []
-    _dll.SensorZero.restype = c_int32
+dll.SensorZero.argtypes = []
+dll.SensorZero.restype = c_int32
 
-    _dll.SetThresholdNo.argtypes = [c_int32]
-    _dll.SetThresholdNo.restype = c_int32
+dll.SetThresholdNo.argtypes = [c_int32]
+dll.SetThresholdNo.restype = c_int32
 
-    # └────────────────────────────────────────────────────────────────┘
+# └────────────────────────────────────────────────────────────────┘
 
-    # ┌─────────────────────────── Status  ────────────────────────────┐
+# ┌─────────────────────────── Status  ────────────────────────────┐
 
-    _dll.GetAlarmMessage.argtypes = [c_int32]
-    _dll.GetAlarmMessage.restype = c_wchar_p
+dll.GetAlarmMessage.argtypes = [c_int32]
+dll.GetAlarmMessage.restype = c_wchar_p
 
-    _dll.FuncGetSystemCmdState.argtypes = [c_int32]
-    _dll.FuncGetSystemCmdState.restype = c_int32
+dll.FuncGetSystemCmdState.argtypes = [c_int32]
+dll.FuncGetSystemCmdState.restype = c_int32
 
-    _dll.FuncGetOtherCmdState.argtypes = [c_int32]
-    _dll.FuncGetOtherCmdState.restype = c_int32
+dll.FuncGetOtherCmdState.argtypes = [c_int32]
+dll.FuncGetOtherCmdState.restype = c_int32
 
-    _dll.FuncGetAxisState.argtypes = [c_int32, c_int32]
-    _dll.FuncGetAxisState.restype = c_int32
+dll.FuncGetAxisState.argtypes = [c_int32, c_int32]
+dll.FuncGetAxisState.restype = c_int32
 
-    _dll.FuncGetState.argtypes = [c_int32]
-    _dll.FuncGetState.restype = c_int32
+dll.FuncGetState.argtypes = [c_int32]
+dll.FuncGetState.restype = c_int32
 
-    # └────────────────────────────────────────────────────────────────┘
+# └────────────────────────────────────────────────────────────────┘
 
-    # ┌─────────────────────────── System ─────────────────────────────┐
+# ┌─────────────────────────── System ─────────────────────────────┐
 
-    _dll.FuncStop.argtypes = [c_int32]
-    _dll.FuncStop.restype = c_int32
+dll.FuncStop.argtypes = [c_int32]
+dll.FuncStop.restype = c_int32
 
-    _dll.FuncContinue.argtypes = [c_int32]
-    _dll.FuncContinue.restype = c_int32
+dll.FuncContinue.argtypes = [c_int32]
+dll.FuncContinue.restype = c_int32
 
-    _dll.FuncEnd.argtypes = [c_int32]
-    _dll.FuncEnd.restype = c_int32
+dll.FuncEnd.argtypes = [c_int32]
+dll.FuncEnd.restype = c_int32
 
-    # └────────────────────────────────────────────────────────────────┘
+# └────────────────────────────────────────────────────────────────┘
 
-    # ┌─────────────────────────── Axis ───────────────────────────────┐
+# ┌─────────────────────────── Axis ───────────────────────────────┐
 
-    _dll.GetAxisPos.argtypes = [c_int32, c_int32]
-    _dll.GetAxisPos.restype = c_double
+dll.GetAxisPos.argtypes = [c_int32, c_int32]
+dll.GetAxisPos.restype = c_double
 
-    _dll.GetAxisStepPos.argtypes = [c_int32, c_int32]
-    _dll.GetAxisStepPos.restype = c_int32
+dll.GetAxisStepPos.argtypes = [c_int32, c_int32]
+dll.GetAxisStepPos.restype = c_int32
 
-    _dll.FuncOrgn.argtypes = [c_int32, c_int32]
-    _dll.FuncOrgn.restype = c_int32
+dll.FuncOrgn.argtypes = [c_int32, c_int32]
+dll.FuncOrgn.restype = c_int32
 
-    _dll.FuncAbsMove.argtypes = [c_int32, c_int32, c_double, c_double, c_int32]
-    _dll.FuncAbsMove.restype = c_int32
+dll.FuncAbsMove.argtypes = [c_int32, c_int32, c_double, c_double, c_int32]
+dll.FuncAbsMove.restype = c_int32
 
-    _dll.FuncAddMove.argtypes = [c_int32, c_int32, c_double, c_double, c_int32]
-    _dll.FuncAddMove.restype = c_int32
+dll.FuncAddMove.argtypes = [c_int32, c_int32, c_double, c_double, c_int32]
+dll.FuncAddMove.restype = c_int32
 
-    _dll.FuncSyringeAbsMove.argtypes = [c_int32, c_int32]
-    _dll.FuncSyringeAbsMove.restype = c_int32
+dll.FuncSyringeAbsMove.argtypes = [c_int32, c_int32]
+dll.FuncSyringeAbsMove.restype = c_int32
 
-    _dll.FuncSyringeAddMove.argtypes = [c_int32, c_int32]
-    _dll.FuncSyringeAddMove.restype = c_int32
+dll.FuncSyringeAddMove.argtypes = [c_int32, c_int32]
+dll.FuncSyringeAddMove.restype = c_int32
 
-    # └────────────────────────────────────────────────────────────────┘
+# └────────────────────────────────────────────────────────────────┘
 
-    # ┌───────────────────────── Composite ────────────────────────────┐
+# ┌───────────────────────── Composite ────────────────────────────┐
 
-    _dll.FuncXYZOrgn.argtypes = [c_int32]
-    _dll.FuncXYZOrgn.restype = c_int32
+dll.FuncXYZOrgn.argtypes = [c_int32]
+dll.FuncXYZOrgn.restype = c_int32
 
-    _dll.FuncPipetting.argtypes = [c_int32, c_int32, c_int32]
-    _dll.FuncPipetting.restype = c_int32
+dll.FuncPipetting.argtypes = [c_int32, c_int32, c_int32]
+dll.FuncPipetting.restype = c_int32
 
-    _dll.FuncLiquidLevelCheck.argtypes = [c_double, c_double, c_double, c_int32]
-    _dll.FuncLiquidLevelCheck.restype = c_int32
+dll.FuncLiquidLevelCheck.argtypes = [c_double, c_double, c_double, c_int32]
+dll.FuncLiquidLevelCheck.restype = c_int32
 
-    _dll.FuncGetLiquidLevel.argtypes = []
-    _dll.FuncGetLiquidLevel.restype = c_double
+dll.FuncGetLiquidLevel.argtypes = []
+dll.FuncGetLiquidLevel.restype = c_double
 
-    _dll.FuncTipIn.argtypes = [c_double, c_double, c_int32]
-    _dll.FuncTipIn.restype = c_int32
+dll.FuncTipIn.argtypes = [c_double, c_double, c_int32]
+dll.FuncTipIn.restype = c_int32
 
-    _dll.FuncTipOut.argtypes = [c_double, c_double, c_int32]
-    _dll.FuncTipOut.restype = c_int32
+dll.FuncTipOut.argtypes = [c_double, c_double, c_int32]
+dll.FuncTipOut.restype = c_int32
 
-    _dll.FuncXY_Move.argtypes = [c_double, c_double, c_double, c_double, c_int32]
-    _dll.FuncXY_Move.restype = c_int32
+dll.FuncXY_Move.argtypes = [c_double, c_double, c_double, c_double, c_int32]
+dll.FuncXY_Move.restype = c_int32
 
-    # └────────────────────────────────────────────────────────────────┘
-
-    return _dll
+# └────────────────────────────────────────────────────────────────┘
