@@ -1,5 +1,6 @@
 from enum import IntEnum
 from monitor import Monitor
+from controller_api import *
 
 class HardID(IntEnum):
     LIQUID_HANDLER = 90010
@@ -21,6 +22,8 @@ class BaseDevice:
     def __init__(self, hard: HardID):
         self.hard = hard
         self.monitor = Monitor(hard, self._on_state)
+        self.position      = [0, 0, 0, 0]
+        self.position_step = [0, 0, 0, 0]
 
     def _on_state(self, state):
         if state == 0:
@@ -45,6 +48,14 @@ class LiquidHandler(BaseDevice):
     def __init__(self):
         super().__init__(HardID.LIQUID_HANDLER)
 
+    def is_syringe_homed(self):
+        return is_syringe_org()
+
+    def is_collision_sensor(self):
+        return is_collision_sensor()
+
+    def syringe_move_abs(self, speed: float, volume: float):
+        return syringe_move_abs(speed, volume)
 class ImagingUnit(BaseDevice):
     def __init__(self):
         super().__init__(HardID.IMAGING_UNIT)

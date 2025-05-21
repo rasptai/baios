@@ -1,18 +1,16 @@
 ::: mermaid
-
 classDiagram
 
-class DeviceController {
-  +liquid_handler: SLXDevice
-  +imaging_unit:   IMGDevice
-}
+class BAiOS
+
+class DeviceController
 
 class BaseDevice {
   +hard
   +state
+  +position
+  +position_step
   +monitor
-  +position_mm: dict
-  +position_step: dict
   +start_monitor()
   +stop_monitor()
   +get_axis_pos()
@@ -20,11 +18,11 @@ class BaseDevice {
   -on_state()
 }
 
-class SLXDevice
+class LiquidHandler
 
-class IMGDevice
+class ImagingUnit
 
-class Monitor {
+class StatusMonitor {
   +hard
   +interval
   +callback
@@ -35,9 +33,23 @@ class Monitor {
   -run()
 }
 
-BaseDevice <|-- SLXDevice : 継承
-BaseDevice <|-- IMGDevice : 継承
-DeviceController "1" *-- "1" SLXDevice : has
-DeviceController "1" *-- "1" IMGDevice : has
-SLXDevice "1" o-- "1" Monitor : 合成
-IMGDevice "1" o-- "1" Monitor : 合成
+class StageManager
+
+class Stage
+
+class Labware
+
+BAiOS *-- "1" DeviceController: 合成
+BAiOS *-- "1" StageManager    : 合成
+
+DeviceController *-- "1" LiquidHandler: 合成
+DeviceController *-- "1" ImagingUnit  : 合成
+
+BaseDevice <|-- LiquidHandler: 継承
+BaseDevice <|-- ImagingUnit  : 継承
+BaseDevice *-- StatusMonitor : 合成
+
+StageManager *-- "4" Stage: 合成
+Stage o-- Labware: 集約
+
+LiquidHandler --> StageManager: 参照

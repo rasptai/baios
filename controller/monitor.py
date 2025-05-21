@@ -1,4 +1,4 @@
-from signature import dll
+from controller_api import get_device_state
 import threading
 class Monitor:
     def __init__(self, hard, callback, interval=0.1):
@@ -21,7 +21,7 @@ class Monitor:
     def _run(self):
         last_state = None
         while not self._stop_event.is_set():
-            state = dll.FuncGetState(self.hard_id)
+            state = get_device_state(self.hard_id)
             if state != last_state:
                 self.callback(state)
                 last_state = state
