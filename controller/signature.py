@@ -1,6 +1,6 @@
 from importlib.resources import files
 from pathlib import Path
-from ctypes import CDLL, c_int32, c_double, c_wchar_p
+from ctypes import CDLL, c_int32, c_double, c_char_p
 
 if __package__ :
     dll_path = files(__package__).joinpath("bin", "BAiOS.dll")
@@ -52,7 +52,7 @@ dll.SetThresholdNo.restype = c_int32
 # ┌─────────────────────────── Status  ────────────────────────────┐
 
 dll.GetAlarmMessage.argtypes = [c_int32]
-dll.GetAlarmMessage.restype = c_wchar_p
+dll.GetAlarmMessage.restype = c_char_p
 
 dll.FuncGetSystemCmdState.argtypes = [c_int32]
 dll.FuncGetSystemCmdState.restype = c_int32

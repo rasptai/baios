@@ -11,6 +11,7 @@ numpy = "*"
 scipy = "*"
 matplotlib = "*"
 scikit-image = "*"
+pyserial = "*"
 
 [dev-packages]
 
