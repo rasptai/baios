@@ -1,4 +1,4 @@
-from controller_api import get_device_state
+from api.controller.controller_api import get_device_state
 import threading
 class Monitor:
     def __init__(self, hard, callback, interval=0.1):

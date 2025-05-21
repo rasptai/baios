@@ -1,6 +1,6 @@
 import time
 import functools
-from signature import dll
+from api.controller.signature import dll
 
 def axis_command(_func=None, *, hard=None, axis=None):
     """

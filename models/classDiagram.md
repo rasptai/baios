@@ -3,7 +3,7 @@ classDiagram
 
 class BAiOS
 
-class DeviceController
+class Controller
 
 class BaseDevice {
   +hard
@@ -33,23 +33,22 @@ class StatusMonitor {
   -run()
 }
 
-class StageManager
-
+class Deck
 class Stage
 
 class Labware
 
-BAiOS *-- "1" DeviceController: 合成
-BAiOS *-- "1" StageManager    : 合成
+BAiOS *-- "1" Controller: 合成
+BAiOS *-- "1" Deck    : 合成
 
-DeviceController *-- "1" LiquidHandler: 合成
-DeviceController *-- "1" ImagingUnit  : 合成
+Controller *-- "1" LiquidHandler: 合成
+Controller *-- "1" ImagingUnit  : 合成
 
 BaseDevice <|-- LiquidHandler: 継承
 BaseDevice <|-- ImagingUnit  : 継承
 BaseDevice *-- StatusMonitor : 合成
 
-StageManager *-- "4" Stage: 合成
+Deck *-- "4" Stage: 合成
 Stage o-- Labware: 集約
 
-LiquidHandler --> StageManager: 参照
+LiquidHandler --> Deck: 参照

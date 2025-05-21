@@ -1,6 +1,6 @@
 from enum import IntEnum
-from monitor import Monitor
-from controller_api import *
+from api.controller.monitor import Monitor
+from api.controller.controller_api import *
 
 class HardID(IntEnum):
     LIQUID_HANDLER = 90010

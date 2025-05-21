@@ -1,4 +1,4 @@
-from signature import dll
+from api.controller.signature import dll
 class DeviceController:
     _instance = None
 

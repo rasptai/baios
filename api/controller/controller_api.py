@@ -1,4 +1,4 @@
-from signature import dll
+from api.controller.signature import dll
 
 def device_open() -> int:
     return dll.FuncDeviceOpen()
